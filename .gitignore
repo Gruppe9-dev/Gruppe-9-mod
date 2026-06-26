@@ -1,0 +1,13 @@
+# HEMTT / Arma build output
+.hemttout/
+*.pbo
+*.bisign
+*.biprivatekey
+*.bikey
+.hemttprivatekey
+*.rpt
+*.log
+
+# Local files
+.env
+*.local
