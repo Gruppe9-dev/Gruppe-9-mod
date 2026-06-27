@@ -4,12 +4,6 @@ params [
     ["_activated", true, [true]]
 ];
 
-if (!isServer) exitWith {
-    if (!isNull _logic) then {
-        deleteVehicle _logic;
-    };
-};
-
 if (!_activated) exitWith {
     diag_log "[grp9_mod] Start tracking module ignored because it was not activated.";
     if (!isNull _logic) then {
@@ -17,19 +11,21 @@ if (!_activated) exitWith {
     };
 };
 
-if (isNil "grp9_stats_fnc_startOperation") exitWith {
-    diag_log "[grp9_mod] Start tracking module failed: grp9_stats_fnc_startOperation is not available. Load @grp9_stats.";
-    if (!isNull _logic) then {
-        deleteVehicle _logic;
-    };
-};
+private _logicNetId = if (isNull _logic) then {""} else {netId _logic};
+private _requesterOwner = if (hasInterface) then {clientOwner} else {0};
+diag_log format [
+    "[grp9_mod] Start tracking module activated. isServer=%1 logic_net_id=%2 requester_owner=%3",
+    isServer,
+    _logicNetId,
+    _requesterOwner
+];
 
-diag_log "[grp9_mod] Start tracking module activated.";
-private _result = [] call grp9_stats_fnc_startOperation;
-diag_log format ["[grp9_mod] Start tracking module result: %1", _result];
+if (isServer) then {
+    [_logicNetId, _requesterOwner] call grp9_mod_fnc_serverStartTracking;
+} else {
+    [_logicNetId, _requesterOwner] remoteExecCall ["grp9_mod_fnc_serverStartTracking", 2];
+};
 
 if (!isNull _logic) then {
     deleteVehicle _logic;
 };
-
-_result

@@ -6,7 +6,8 @@ class CfgPatches {
         requiredAddons[] = {"A3_Modules_F", "A3_Data_F_Enoch_Loadorder"};
         units[] = {
             "grp9_mod_moduleStartTracking",
-            "grp9_mod_moduleFinishTracking"
+            "grp9_mod_moduleFinishTracking",
+            "grp9_mod_moduleApiStatus"
         };
         weapons[] = {};
     };
@@ -45,6 +46,11 @@ class CfgFunctions {
             file = "z\grp9_mod\addons\main\functions\modules";
             class moduleStartTracking {};
             class moduleFinishTracking {};
+            class serverStartTracking {};
+            class serverFinishTracking {};
+            class moduleApiStatus {};
+            class serverApiStatus {};
+            class clientTrackingFeedback {};
         };
     };
 };
@@ -238,6 +244,25 @@ class CfgVehicles {
 
         class ModuleDescription: ModuleDescription {
             description = "Finishes Gruppe 9 stats tracking by calling grp9_stats_fnc_finishOperation on the server.";
+        };
+    };
+
+    class grp9_mod_moduleApiStatus: Module_F {
+        scope = 2;
+        scopeCurator = 2;
+        displayName = "Stats API Status";
+        category = "grp9_modules";
+        function = "grp9_mod_fnc_moduleApiStatus";
+        functionPriority = 1;
+        isGlobal = 1;
+        isTriggerActivated = 0;
+        isDisposable = 1;
+        curatorCanAttach = 0;
+        icon = "z\grp9_mod\addons\main\data\module_start_tracking_ca.paa";
+        portrait = "z\grp9_mod\addons\main\data\module_start_tracking_ca.paa";
+
+        class ModuleDescription: ModuleDescription {
+            description = "Checks the Gruppe 9 stats API status through the server extension.";
         };
     };
 };
