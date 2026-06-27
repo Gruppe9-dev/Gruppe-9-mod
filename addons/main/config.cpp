@@ -211,7 +211,7 @@ class CfgVehicles {
         function = "grp9_mod_fnc_moduleStartTracking";
         functionPriority = 1;
         isGlobal = 1;
-        isTriggerActivated = 1;
+        isTriggerActivated = 0;
         isDisposable = 1;
         curatorCanAttach = 0;
         icon = "z\grp9_mod\addons\main\data\module_start_tracking_ca.paa";
@@ -230,7 +230,7 @@ class CfgVehicles {
         function = "grp9_mod_fnc_moduleFinishTracking";
         functionPriority = 1;
         isGlobal = 1;
-        isTriggerActivated = 1;
+        isTriggerActivated = 0;
         isDisposable = 1;
         curatorCanAttach = 0;
         icon = "z\grp9_mod\addons\main\data\module_finish_tracking_ca.paa";
