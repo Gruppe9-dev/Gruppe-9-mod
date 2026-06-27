@@ -4,6 +4,8 @@ params [
     ["_activated", true, [true]]
 ];
 
+if (!isServer) exitWith {};
+
 if (!_activated) exitWith {
     diag_log "[grp9_mod] Finish tracking module ignored because it was not activated.";
     if (!isNull _logic) then {
@@ -12,7 +14,7 @@ if (!_activated) exitWith {
 };
 
 private _logicNetId = if (isNull _logic) then {""} else {netId _logic};
-private _requesterOwner = if (hasInterface) then {clientOwner} else {0};
+private _requesterOwner = if (isNull _logic) then {0} else {owner _logic};
 diag_log format [
     "[grp9_mod] Finish tracking module activated. isServer=%1 logic_net_id=%2 requester_owner=%3",
     isServer,
@@ -20,11 +22,7 @@ diag_log format [
     _requesterOwner
 ];
 
-if (isServer) then {
-    [_logicNetId, _requesterOwner] call grp9_mod_fnc_serverFinishTracking;
-} else {
-    [_logicNetId, _requesterOwner] remoteExecCall ["grp9_mod_fnc_serverFinishTracking", 2];
-};
+[_logicNetId, _requesterOwner] call grp9_mod_fnc_serverFinishTracking;
 
 if (!isNull _logic) then {
     deleteVehicle _logic;
