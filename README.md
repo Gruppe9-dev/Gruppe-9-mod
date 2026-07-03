@@ -4,8 +4,11 @@ HEMTT-built Arma 3 mod for Gruppe 9 server utilities.
 
 ## Features
 
+- Placeable Gruppe 9 banner using a vanilla Arma 3 placeholder texture.
+- Gruppe 9 map marker using the mod logo.
 - Eden/Zeus module to start stats tracking.
 - Eden/Zeus module to finish stats tracking.
+- Eden/Zeus module to show current headless-client AI distribution.
 - Main menu controls with a direct connect button for the Gruppe 9 server.
 
 The tracking modules call functions from `@grp9_stats`, so load the stats mod when you want tracking integration.
@@ -24,6 +27,23 @@ class CfgGrp9Mod
 ```
 
 Set `serverAddress` to the public IP or DNS name of the server.
+
+## Banner Placeholder Texture
+
+The placeable banner is defined as `grp9_mod_flag` in `addons/main/config.cpp`.
+It currently uses Arma 3's built-in `a3\data_f\flags\flag_blue_co.paa` texture.
+Replace `hiddenSelectionsTextures[]` there when the final Gruppe 9 flag texture is ready.
+
+## Map Marker
+
+The map marker is defined as `grp9_mod_marker` in `addons/main/config.cpp`.
+It uses `z\grp9_mod\addons\main\data\grp9_logo_ca.paa` as its icon and is grouped under the `Gruppe 9` marker class.
+
+## Headless Client Status Module
+
+The Zeus/Eden module is defined as `grp9_mod_moduleHeadlessStatus`.
+It reports connected headless clients and counts AI-only groups by their current `groupOwner`.
+The result is sent only to the client owner that placed the module.
 
 ## Build
 

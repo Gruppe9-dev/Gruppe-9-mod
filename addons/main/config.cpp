@@ -3,11 +3,13 @@ class CfgPatches {
         name = "Gruppe 9 Mod";
         author = "Gruppe 9";
         requiredVersion = 2.18;
-        requiredAddons[] = {"A3_Modules_F", "A3_Data_F_Enoch_Loadorder"};
+        requiredAddons[] = {"A3_Modules_F", "A3_Structures_F_Orange_Humanitarian_Flags", "A3_Data_F_Enoch_Loadorder"};
         units[] = {
+            "grp9_mod_flag",
             "grp9_mod_moduleStartTracking",
             "grp9_mod_moduleFinishTracking",
-            "grp9_mod_moduleApiStatus"
+            "grp9_mod_moduleApiStatus",
+            "grp9_mod_moduleHeadlessStatus"
         };
         weapons[] = {};
     };
@@ -51,6 +53,9 @@ class CfgFunctions {
             class moduleApiStatus {};
             class serverApiStatus {};
             class clientTrackingFeedback {};
+            class moduleHeadlessStatus {};
+            class serverHeadlessStatus {};
+            class clientModuleFeedback {};
         };
     };
 };
@@ -203,10 +208,39 @@ class RscDisplayMain: RscStandardDisplay {
     };
 };
 
+class CfgMarkerClasses {
+    class grp9_mod_markers {
+        displayName = "Gruppe 9";
+    };
+};
+
+class CfgMarkers {
+    class grp9_mod_marker {
+        name = "Gruppe 9";
+        icon = "z\grp9_mod\addons\main\data\grp9_logo_ca.paa";
+        color[] = {1, 1, 1, 1};
+        size = 32;
+        shadow = 0;
+        scope = 2;
+        markerClass = "grp9_mod_markers";
+    };
+};
+
 class CfgVehicles {
+    class Banner_01_F;
     class Logic;
     class Module_F: Logic {
         class ModuleDescription;
+    };
+
+    class grp9_mod_flag: Banner_01_F {
+        author = "Gruppe 9";
+        scope = 2;
+        scopeCurator = 2;
+        displayName = "Gruppe 9 Banner";
+        editorCategory = "EdCat_Signs";
+        editorSubcategory = "EdSubcat_Flags";
+        hiddenSelectionsTextures[] = {"a3\data_f\flags\flag_blue_co.paa"};
     };
 
     class grp9_mod_moduleStartTracking: Module_F {
@@ -263,6 +297,25 @@ class CfgVehicles {
 
         class ModuleDescription: ModuleDescription {
             description = "Checks the Gruppe 9 stats API status through the server extension.";
+        };
+    };
+
+    class grp9_mod_moduleHeadlessStatus: Module_F {
+        scope = 2;
+        scopeCurator = 2;
+        displayName = "Headless Client Status";
+        category = "grp9_modules";
+        function = "grp9_mod_fnc_moduleHeadlessStatus";
+        functionPriority = 1;
+        isGlobal = 1;
+        isTriggerActivated = 0;
+        isDisposable = 1;
+        curatorCanAttach = 0;
+        icon = "z\grp9_mod\addons\main\data\module_start_tracking_ca.paa";
+        portrait = "z\grp9_mod\addons\main\data\module_start_tracking_ca.paa";
+
+        class ModuleDescription: ModuleDescription {
+            description = "Shows the current server/headless-client AI group distribution to the Zeus who placed the module.";
         };
     };
 };
