@@ -28,11 +28,11 @@ class CfgGrp9Mod
 
 Set `serverAddress` to the public IP or DNS name of the server.
 
-## Banner Placeholder Texture
+## Banner Texture
 
-The placeable banner is defined as `grp9_mod_flag` in `addons/main/config.cpp`.
-It currently uses Arma 3's built-in `a3\data_f\flags\flag_blue_co.paa` texture.
-Replace `hiddenSelectionsTextures[]` there when the final Gruppe 9 flag texture is ready.
+The placeable banners are defined as `grp9_mod_flag` and `grp9_mod_flag2` in
+`addons/main/config.cpp`. They inherit from `Banner_01_F` and use the custom
+`grp9_flag.paa` and `grp9_flag2.paa` textures.
 
 ## Map Marker
 

@@ -6,6 +6,7 @@ class CfgPatches {
         requiredAddons[] = {"A3_Modules_F", "A3_Structures_F_Orange_Humanitarian_Flags", "A3_Data_F_Enoch_Loadorder"};
         units[] = {
             "grp9_mod_flag",
+            "grp9_mod_flag2",
             "grp9_mod_moduleStartTracking",
             "grp9_mod_moduleFinishTracking",
             "grp9_mod_moduleApiStatus",
@@ -83,7 +84,7 @@ class RscDisplayMain: RscStandardDisplay {
         };
         class grp9_mod_background: RscPicture {
             idc = 990000;
-            text = "z\grp9_mod\addons\main\data\main_menu_background.jpg";
+            text = "z\grp9_mod\addons\main\data\grp9_background.jpg";
             x = "safezoneX";
             y = "safezoneY";
             w = "safezoneW";
@@ -240,7 +241,17 @@ class CfgVehicles {
         displayName = "Gruppe 9 Banner";
         editorCategory = "EdCat_Signs";
         editorSubcategory = "EdSubcat_Flags";
-        hiddenSelectionsTextures[] = {"a3\data_f\flags\flag_blue_co.paa"};
+        hiddenSelectionsTextures[] = {"z\grp9_mod\addons\main\data\grp9_flag.paa"};
+    };
+
+    class grp9_mod_flag2: Banner_01_F {
+        author = "Gruppe 9";
+        scope = 2;
+        scopeCurator = 2;
+        displayName = "Gruppe 9 Banner 2";
+        editorCategory = "EdCat_Signs";
+        editorSubcategory = "EdSubcat_Flags";
+        hiddenSelectionsTextures[] = {"z\grp9_mod\addons\main\data\grp9_flag2.paa"};
     };
 
     class grp9_mod_moduleStartTracking: Module_F {
